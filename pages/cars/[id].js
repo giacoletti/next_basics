@@ -18,8 +18,8 @@ export default function Car({ car }) {
     </>
   );
 }
-
-export async function getStaticProps({ params }) {
+// Server-Side Rendering
+export async function getServerSideProps({ params }) { 
   const req = await fetch(`http://localhost:3000/${params.id}.json`);
   const data = await req.json();
 
@@ -28,16 +28,27 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export async function getStaticPaths() {
-  const req = await fetch("http://localhost:3000/cars.json");
-  const data = await req.json();
+// Static Site Generation
 
-  const paths = data.map((car) => {
-    return { params: { id: car } };
-  });
+// export async function getStaticProps({ params }) { 
+//   const req = await fetch(`http://localhost:3000/${params.id}.json`);
+//   const data = await req.json();
 
-  return {
-    paths,
-    fallback: false
-  };
-}
+//   return {
+//     props: { car: data }
+//   };
+// }
+
+// export async function getStaticPaths() {
+//   const req = await fetch("http://localhost:3000/cars.json");
+//   const data = await req.json();
+
+//   const paths = data.map((car) => {
+//     return { params: { id: car } };
+//   });
+
+//   return {
+//     paths,
+//     fallback: false
+//   };
+// }
